@@ -51,11 +51,13 @@ from  .models import district,division,thana
 admin.site.register(district,ImportExportModelAdmin)
 admin.site.register(division,ImportExportModelAdmin)
 admin.site.register(thana,ImportExportModelAdmin)
+admin.site.register(color_template,ImportExportModelAdmin)
 admin.site.register(storeAccess)
 admin.site.register(Verification_Type)
 admin.site.register(Verification_Status)
-admin.site.register(Requisition)
+admin.site.register(Requisition,ImportExportModelAdmin)
 admin.site.register(EventAttendent)
+
 class CountryResource(resources.ModelResource):
     class Meta:
         model = Country
@@ -66,11 +68,12 @@ class CountryAdmin(ImportExportModelAdmin):
 
 admin.site.register(Country,CountryAdmin)
 admin.site.register(user_status)
-admin.site.register(GrandFatherTemplate)
-admin.site.register(FatherTemplate)
-admin.site.register(SonTemplate)
+admin.site.register(GrandFatherTemplate,ImportExportModelAdmin)
+admin.site.register(FatherTemplate,ImportExportModelAdmin)
+admin.site.register(SonTemplate,ImportExportModelAdmin)
+
 admin.site.register(location)
 admin.site.register(sb_attendent)
 admin.site.register(sb_verification_status)
-admin.site.register(color_template)
+
 admin.site.register(sb_user_status)
