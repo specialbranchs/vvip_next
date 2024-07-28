@@ -33,6 +33,6 @@ urlpatterns = [
     # path('',views.nextjsindex,name='nextjsindex'),
 #     path("", include("django_nextjs.urls")),
 #     path("", include("nextapp.urls")),
-# ]
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
