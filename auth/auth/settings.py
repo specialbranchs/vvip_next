@@ -17,7 +17,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['fislam.pythonanywhere.com']
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['fims.specialbranch.gov.bd','localhost','127.0.0.1','118.179.167.195']
 # Application definition
 
 INSTALLED_APPS = [
