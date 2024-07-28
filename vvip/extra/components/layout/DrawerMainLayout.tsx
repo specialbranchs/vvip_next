@@ -205,7 +205,12 @@ export default function DrawerMainScreen() {
       >
         <DrawerHeader>
           <Stack sx={{ width: "100%" }} direction="row" justifyContent="center">
-            <Image width={35} src={assets.images.logo} alt="farid" />
+            <Image
+              width={35}
+              src={assets.images.logo}
+              alt="logo"
+              placeholder="blur"
+            />
           </Stack>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -231,7 +236,7 @@ export default function DrawerMainScreen() {
         pauseOnHover
         theme="light"
         transition={Bounce}
-        
+
         //  style={sxStyle}
       />
     </Box>

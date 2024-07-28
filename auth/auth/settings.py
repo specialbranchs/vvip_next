@@ -17,7 +17,7 @@ DEBUG = False
 
 # ALLOWED_HOSTS = ['fislam.pythonanywhere.com']
 
-ALLOWED_HOSTS = ['fims.specialbranch.gov.bd','localhost','127.0.0.1','118.179.167.195']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -183,9 +183,6 @@ EMAIL_HOST_USER = 'specialbranch64@gmail.com'
 EMAIL_HOST_PASSWORD = 'zaqpvtbqumwwgtrl'
 
 
-NEXTJS_SETTINGS = {
-        "nextjs_server_url": "http://127.0.0.1:3000",
-    }
 
 
 # dfa

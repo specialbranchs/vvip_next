@@ -26,6 +26,8 @@ export const toast_error = (mes: string) => {
     progress: undefined,
     theme: "light",
     transition: Bounce,
-    style:sxStyle
+    style:{
+      zIndex:5000
+    }
   });
 };

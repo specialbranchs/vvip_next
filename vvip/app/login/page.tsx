@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/extra/state/reducer";
 import NumericInputProps from "@/extra/pages/component/numericInputProps";
 import { toast_error } from "@/extra/utils/toast";
+import { ToastContainer, Bounce } from "react-toastify";
 
 const Login = (props: any) => {
   const route = useRouter();
@@ -88,20 +89,21 @@ const Login = (props: any) => {
                 is_adminuser: data.is_admin,
                 is_staff: data.is_staff,
               };
-              // formik.resetForm();
-              dispatch(actions.user.saveUser(user));
-              seterror("");
               const link = userNavigation(user);
               route.push(link);
+              dispatch(actions.user.saveUser(user));
+              seterror("");
+            
             } else {
-              // seterror("User Not Found");
-              toast_error("User Not Found")
+              seterror("User Not Found");
+              // toast_error("User Not Found")
             }
             setLoading(false);
+           
           },
           error: (error: any) => {
-            // seterror("User not Found");
-            toast_error("User Not Found")
+            seterror("User Not Found");
+            // toast_error("User Not Found")
             setLoading(false);
           },
         });
@@ -187,6 +189,7 @@ const Login = (props: any) => {
           <Image
             src={assets.images.logo}
             style={{ width: "100%", height: "100%" }}
+            placeholder="blur"
             alt="logo"
           />
         </Box>
@@ -200,11 +203,7 @@ const Login = (props: any) => {
             mt:1
           }}
         >
-          <Box>
-            <Typography color={"red"} sx={sxStyle}>
-              {error}
-            </Typography>
-          </Box>
+         
           <form
             style={{
               flexDirection: "column",
@@ -275,6 +274,11 @@ const Login = (props: any) => {
               Login
             </LoadingButton>
           </form>
+          <Box mt={2}>
+            <Typography color={"red"} sx={sxStyle}>
+              {error}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
