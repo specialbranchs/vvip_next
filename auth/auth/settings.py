@@ -13,7 +13,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'build')
 SECRET_KEY = 'django-insecure-#a!r3krzthnc#-o1g2f1#7*(_2p7m)o4qqtg4m)-z40v==ylt1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['fislam.pythonanywhere.com']
 
