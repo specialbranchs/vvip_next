@@ -12,6 +12,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { sxStyle } from "@/extra/utils/config";
 import { User } from "@/extra/typings/structures";
 import { useRouter } from "next/navigation";
+import api from "@/extra/api";
+import { doOnSubscribe } from "@/extra/utils/rxjs.utils";
+import { toast_success } from "@/extra/utils/toast";
+import { values } from "lodash";
+import { finalize } from "rxjs";
+import { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,11 +62,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Topbar = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const route=useRouter()
+  const route = useRouter();
   const user = useSelector(
     (state: RootState) => state.currentUser.user
   ) as User;
+  const Logout = () => {
+    api.auth
+      .LogOut(user.id)
+      .pipe(
+        doOnSubscribe(() => setLoading(true)),
+        finalize(() => setLoading(false))
+      )
+      .subscribe({
+        next: async (res) => {
+          route.push("/login");
+          dispatch(actions.logOut());
+        },
+        error: () => {
+          // console.log(error)
+          setLoading(false);
+        },
+      });
+  };
   return (
     <Toolbar
       sx={{
@@ -80,22 +105,23 @@ const Topbar = () => {
         </Typography>
       </Box>
       <Box ml={2}>
-        <ListItemButton
-          sx={{
-            borderRadius: 10,
-            fontFamily: sxStyle.fontFamily,
-            fontSize: 14,
-            backgroundColor: "#aa94d6",
-            color: "white",
-            fontWeight: "100",
-          }}
-          onClick={() => {
-              route.push('/login')
-            dispatch(actions.user.removeUser());
-          }}
-        >
-          LOGOUT
-        </ListItemButton>
+        {user && (
+          <ListItemButton
+            sx={{
+              borderRadius: 10,
+              fontFamily: sxStyle.fontFamily,
+              fontSize: 14,
+              backgroundColor: "#aa94d6",
+              color: "white",
+              fontWeight: "100",
+            }}
+            onClick={() => {
+              Logout();
+            }}
+          >
+            LOGOUT
+          </ListItemButton>
+        )}
       </Box>
       <Search>
         <SearchIconWrapper>

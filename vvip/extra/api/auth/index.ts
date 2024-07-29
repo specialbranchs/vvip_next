@@ -2,9 +2,12 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 
 import client from "../client";
-import { ChangePassword, SignInData, UploadUserData } from "@/extra/typings/formData";
+import {
+  ChangePassword,
+  SignInData,
+  UploadUserData,
+} from "@/extra/typings/formData";
 import { User } from "@/extra/typings/structures";
-
 
 type SignInResponseData = {
   status: number;
@@ -42,10 +45,10 @@ const signUpRequest$ = (data: UploadUserData): Observable<any> =>
       })
     );
 
-const TokenRefresh$ = (data: User | null): Observable<any> =>
+const LogOut = (id: number): Observable<any> =>
   client
-    .post<any>("token/refresh/", {
-      refresh: data?.refresh,
+    .post<any>("logout/", {
+      id: id,
     })
     .pipe(
       map((response) => {
@@ -89,7 +92,7 @@ const ResetPassword = (data: ChangePassword): Observable<any> =>
 export default {
   signInRequest$,
   signUpRequest$,
-  TokenRefresh$,
+  LogOut,
   userList$,
   delUser$,
   ResetPassword,

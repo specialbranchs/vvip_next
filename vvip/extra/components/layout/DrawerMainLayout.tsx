@@ -209,7 +209,6 @@ export default function DrawerMainScreen() {
               width={35}
               src={assets.images.logo}
               alt="logo"
-              placeholder="blur"
             />
           </Stack>
           <IconButton onClick={handleDrawerClose}>

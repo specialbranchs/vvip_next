@@ -59,7 +59,7 @@ class UserLogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args):
-        token = Token.objects.get(user=request.user)
+        token = Token.objects.get(user=User.objects.get(pk=request.data['id']))
         token.delete()
         return Response({"success": True, "detail": "Logged out!"}, status=status.HTTP_200_OK)
     
@@ -83,7 +83,7 @@ class TokenAuthnticationApiView(APIView):
                       allowUser=user
                       break
                 
-            print(allowUser)
+           
             if allowUser is None:
                 return Response(response, status=status.HTTP_200_OK)
             token, created = Token.objects.get_or_create(user=user)
