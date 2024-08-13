@@ -77,7 +77,7 @@ const Topbar = () => {
       )
       .subscribe({
         next: async (res) => {
-          route.push("/login");
+          // route.push("/login");
           dispatch(actions.logOut());
         },
         error: () => {

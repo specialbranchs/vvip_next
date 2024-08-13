@@ -1,6 +1,6 @@
 "use client";
 import { Typography, Box, IconButton, FormControl } from "@mui/material";
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
@@ -20,28 +20,19 @@ import { User } from "@/extra/typings/structures";
 import { PASSWORD_MIN_LENGTH, sxStyle } from "@/extra/utils/config";
 import { doOnSubscribe } from "@/extra/utils/rxjs.utils";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import { userNavigation } from "@/extra/utils/convertions";
-import { useSelector } from "react-redux";
-import { RootState } from "@/extra/state/reducer";
 import NumericInputProps from "@/extra/pages/component/numericInputProps";
-import { toast_error } from "@/extra/utils/toast";
-import { ToastContainer, Bounce } from "react-toastify";
 
 const Login = (props: any) => {
   const route = useRouter();
   const [loading, setLoading] = useState(false);
-  const user = useSelector((state: RootState) => state.currentUser.user);
+
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState(false);
   const [error, seterror] = useState("");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  useLayoutEffect(() => {
-    if (user !== null) {
-      redirect("/");
-    }
-  }, []);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -89,17 +80,16 @@ const Login = (props: any) => {
                 is_adminuser: data.is_admin,
                 is_staff: data.is_staff,
               };
-              const link = userNavigation(user);
-              route.push(link);
+              // const link = userNavigation(user);
+
               dispatch(actions.user.saveUser(user));
-              seterror("");
-            
+             // redirect(link);
+              // seterror("");
             } else {
               seterror("User Not Found");
               // toast_error("User Not Found")
             }
-            setLoading(false);
-           
+            // setLoading(false);
           },
           error: (error: any) => {
             seterror("User Not Found");
@@ -200,10 +190,9 @@ const Login = (props: any) => {
             justifyContent: "center",
             alignItems: "center",
             width: "40%",
-            mt:1
+            mt: 1,
           }}
         >
-         
           <form
             style={{
               flexDirection: "column",

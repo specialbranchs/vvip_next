@@ -104,7 +104,7 @@ const AddSBRequestScreen = () => {
       )
       .subscribe({
         next: async (res) => {
-          console.log(res);
+          // console.log(res);
           if (res.items.length > 0) {
             const data = res.items[0];
             formik.setFieldValue("email", data?.email);
@@ -124,7 +124,7 @@ const AddSBRequestScreen = () => {
           setLoading(false);
         },
         error: (err) => {
-          console.log(err);
+          // console.log(err);
           if (err.response && err.response.status === 401) {
             pims_token().then((response) => {
               const token = response.access_token;

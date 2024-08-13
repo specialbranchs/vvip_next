@@ -1,6 +1,6 @@
 # Django #
 
-db.sqlite3
+# db.sqlite3
 pictures-upload/
 report-upload/
 picture-gallary-upload/

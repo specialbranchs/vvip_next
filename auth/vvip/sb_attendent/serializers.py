@@ -61,6 +61,7 @@ class EventSBAttendentVerificationStatusSerializers(serializers.ModelSerializer)
          }
         media=obj.agency
         req=obj.requisition
+
         if media.grandfather and media.father and media.son:  #security
             if req.name=='Govt':
                 tem["boundrytitle"]=media.grandfather.name +" Pass"
@@ -72,15 +73,17 @@ class EventSBAttendentVerificationStatusSerializers(serializers.ModelSerializer)
                 tem["middle"]=media.father.color
             else :
                 duty=color_template.objects.filter(
-                Q(grandfather_id=GrandFatherTemplate.objects.filter(name='Duty').first().id),
-                Q(requisition_id=Requisition.objects.filter(name='Non Govt').first().id)).first().color
+                Q(grandfather=GrandFatherTemplate.objects.filter(name='Duty').first()),
+                Q(requisition=Requisition.objects.filter(name='Non Govt').first())).first().color
 
                 middle=color_template.objects.filter(
-                 Q(grandfather_id=GrandFatherTemplate.objects.filter(name='Media').first().id)).first().color
-                tem["boundry"]=duty.color
-                tem["middle"]=middle.color
+                 Q(grandfather=GrandFatherTemplate.objects.filter(name='Media').first())).first().color
+                tem["boundry"]=duty
+                tem["middle"]=middle
+              
                 tem["boundrytitle"]="Duty Pass"
                 tem["middletitle"]=media.father.name
+
         elif media.grandfather and media.father:
             if req.name=='Govt':
                 tem["boundry"]=color_template.objects.filter(

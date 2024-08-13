@@ -29,7 +29,7 @@ const AppRoutesData = () => {
 
 export default AppRoutesData;
 
-const makeRoute = (user: User | null) => {
+export const makeRoute = (user: User | null) => {
   const role = bolToRole(user);
   if (role > 5) {
     let routeList: RouteType[] = [
